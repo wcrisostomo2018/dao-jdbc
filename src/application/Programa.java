@@ -9,6 +9,8 @@ public class Programa {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		VendedorDao vendedorDao = DaoFactory.createVendedorDao();
+		System.out.println("=== Teste 1: Vendedor findById ===");
+		
 		Vendedor vendedor = vendedorDao.findById(3);
 		
 		
