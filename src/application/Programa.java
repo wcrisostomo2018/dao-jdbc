@@ -3,6 +3,7 @@ package application;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import model.dao.DaoFactory;
 import model.dao.VendedorDao;
@@ -13,6 +14,8 @@ public class Programa {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		Scanner sc = new Scanner(System.in);
 		VendedorDao vendedorDao = DaoFactory.createVendedorDao();
 		
 		System.out.println("=== Teste 1: Vendedor findById ===");		
@@ -45,6 +48,14 @@ public class Programa {
 		vendedor.setNome("Simone");
 		vendedorDao.update(vendedor);
 		System.out.println("Vendedor alterado!");
+		
+		System.out.println("\n=== Teste 6: Vendedor Delete ===");
+		System.out.println("Informe o codigo do vendedor a ser excluido: ");
+		int id = sc.nextInt();
+		vendedorDao.deleteById(id);
+		System.out.println("Vendedor Excluido");
+		
+		sc.close();
 		
 
 	}

@@ -79,7 +79,12 @@ public class VendedorDaoJDBC implements VendedorDao {
 			st.setInt(5, obj.getDepartamento().getId());
 			st.setInt(6, obj.getId());
 			
-			st.executeUpdate();
+			int registro = st.executeUpdate();
+			
+			if (registro == 0) {
+				throw new DbException("Registro nao existente");
+			}
+
 			
 		}
 		catch (SQLException e) {
@@ -92,8 +97,18 @@ public class VendedorDaoJDBC implements VendedorDao {
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("delete from seller where id = ?");
+			st.setInt(1, id);
+			st.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
